@@ -7,6 +7,8 @@ verify_ssl = true
 
 [packages]
 django = {index = "https://pypi.tuna.tsinghua.edu.cn/simple",version = "==2.2.3"}
+pymysql = {index = "https://pypi.tuna.tsinghua.edu.cn/simple",version = "*"}
+mysql = {index = "https://pypi.tuna.tsinghua.edu.cn/simple",version = "*"}
 
 [requires]
 python_version = "3.7"

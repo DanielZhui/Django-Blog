@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Black &amp; White</title>
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/pace.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/custom.css' %}">
+
+    <!-- js -->
+    <script src="{% static 'blog/js/jquery-2.1.3.min.js' %}"></script>
+    <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blog/js/pace.min.js' %}"></script>
+    <script src="{% static 'blog/js/modernizr.custom.js' %}"></script>
+</head>
+<body>
+<!-- 其它内容 -->
+    <script src="{% static 'blog/js/script.js' %}"></script>
+    {% for article in articles %}
+        <article class="article article-{{ article.pk }}">
+            <header>
+                <h1 class="entry-header">
+                    <a href="single.html">{{ article.title }}</a>
+                </h1>
+                <div class="entry-meta">
+                    <span class="article-category"><a href="#">{{ article.category.name }}</a></span>
+                    <span class="article-data"><a href="#"><time class="entry-date" datetime="{{ article.created_time }}">{{ article.created_time }}</time></a></span>
+                    <span class="article-author"><a href="#">{{ article.author }}</a></span>
+                    <span class="comment-link"><a href="#">7 评论</a></span>
+                    <span class="views-count"><a href="#">666 阅读</a></span>
+                </div>
+                <div class="entry-content clearfix">
+                    <p>{{ article.excerpt }}</p>
+                    <div class="read-more cl-effect-14">
+                        <a href="#" class="more-link">继续阅读 <span class="meta-nav">→</span> </a>
+                    </div>
+                </div>
+            </header>
+        </article>
+    {% empty %}
+    <div class="no-article">暂时还没有发布文章</div>
+    {% endfor %}
+</body>
+</html>
