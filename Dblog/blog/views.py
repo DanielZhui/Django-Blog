@@ -6,7 +6,8 @@ from . models import Article
 
 
 def index(request):
-    articles = Article.objects.all().order_by('created_time')
+    articles = Article.objects.all().order_by('createdAt')
+    print('>>>', articles)
     return render(request, 'blog/index.html', context={
-        'article': articles
+        'articles': articles
     })
