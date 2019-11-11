@@ -4,7 +4,7 @@ from . models import Article, Category, Tag
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['title', 'createdAt', 'updatedAt', 'category', 'author']
-    fields = ['title', 'category']
+    fields = ['title', 'category', 'content']
 
     def save_model(self, request, obj, form, change):
         obj.author = request.user
