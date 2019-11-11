@@ -13,6 +13,9 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = '博客分类'
 
+        def __str__(self):
+            return self.name
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=16)

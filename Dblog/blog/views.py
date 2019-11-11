@@ -9,6 +9,13 @@ from . models import Article
 
 def index(request):
     articles = Article.objects.all().order_by('createdAt')
+    for article in articles:
+        article.content = markdown.markdown(article.content,
+                               extensions=[
+                                   'markdown.extensions.extra',
+                                   'markdown.extensions.codehilite',
+                                   'markdown.extensions.toc'
+                               ])
     return render(request, 'blog/index.html', context={
         'articles': articles
     })
@@ -16,10 +23,11 @@ def index(request):
 
 def detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
-    article.content = markdown.markdown(article.content,
-                                        extensions=[
-                                            'markdown.extensions.extra',
-                                            'markdown.extensions.codehilite',
-                                            'markdown.extensions.toc'
-                                        ])
+    md = markdown.Markdown(extensions=[
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
+        'markdown.extensions.toc'
+    ])
+    article.content = md.convert(article.content)
+    article.toc = md.toc
     return render(request, 'blog/detail.html', context={'article': article})

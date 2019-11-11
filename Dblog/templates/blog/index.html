@@ -2,7 +2,7 @@
 
 {% block main %}
     {% for article in articles %}
-         <article class="article.pk">-->
+         <article class="article.pk">
             <header class="entry-header">
                 <h1 class="entry-title">{{ article.title }}
                     <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
@@ -17,7 +17,7 @@
                 </div>
             </header>
             <div class="entry-content clearfix">
-                {{ article.content }}
+                {{ article.content|safe }}
                 <div class="read-more cl-effect-14">
                     <a href="#" class="{{ article.get_absolute_url }}">继续阅读 <span class="meta-nav">→</span></a>
                 </div>
