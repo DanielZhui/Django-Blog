@@ -1,3 +1,4 @@
+import re
 import markdown
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
@@ -32,5 +33,5 @@ def detail(request, pk):
     article.toc = md.toc
     # 当文章中不存在目录时,显示空''
     result = re.search(r'<div class="toc">\s*<ul>(.*)</ul>\s*</div>', md.toc, re.S)
-    post.toc = m.group(1) if result is not None else ''
+    article.toc = result.group(1) if result is not None else ''
     return render(request, 'blog/detail.html', context={'article': article})
