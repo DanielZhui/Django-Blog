@@ -1,10 +1,11 @@
 from django.db import models
 
-# Create your models here.
+import markdown
 from django.db import models
 # from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.utils.html import strip_tags
 
 
 class Category(models.Model):
@@ -34,6 +35,14 @@ class Article(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite'
+        ])
+        self.excerpt = strip_tags(md.convert(self.content))[:60]
+        super().save(*args, **kwargs)
 
     # 第二种完成 updateAt方式
     # def save(self, *args, **kwargs):
