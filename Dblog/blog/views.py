@@ -1,5 +1,7 @@
 import re
 import markdown
+from django.utils.text import slugify
+from markdown.extensions.toc import TocExtension
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
@@ -27,7 +29,8 @@ def detail(request, pk):
     md = markdown.Markdown(extensions=[
         'markdown.extensions.extra',
         'markdown.extensions.codehilite',
-        'markdown.extensions.toc'
+        # 'markdown.extensions.toc'
+        TocExtension(slugify=slugify),
     ])
     article.content = md.convert(article.content)
     article.toc = md.toc
