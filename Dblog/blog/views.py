@@ -5,7 +5,7 @@ from markdown.extensions.toc import TocExtension
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
-from . models import Article
+from . models import Article, Category, Tag
 
 # Create your views here.
 
@@ -38,3 +38,27 @@ def detail(request, pk):
     result = re.search(r'<div class="toc">\s*<ul>(.*)</ul>\s*</div>', md.toc, re.S)
     article.toc = result.group(1) if result is not None else ''
     return render(request, 'blog/detail.html', context={'article': article})
+
+
+# 归档函数
+def archive(request, year, month):
+    articles = Article.objects.filter(
+        createdAt__year=year,
+        createdAt__month=month,
+    ).order_by('createdAt')
+    return render(request, 'blog/index.html', context={'articles': articles})
+
+
+# 分类页面
+def category(request, pk):
+    cate = get_object_or_404(Category, pk=pk)
+    print('>>>', cate)
+    articles = Article.objects.filter(category=cate).order_by('-createdAt')
+    return render(request, 'blog/index.html', context={'articles': articles})
+
+
+# 标签页面
+def tag(request, pk):
+    tags = get_object_or_404(Tag, pk=pk)
+    articles = Article.objects.filter(tags=tags).order_by('createdAt')
+    return render(request, 'blog/index.html', context={'articles': articles})
