@@ -19,6 +19,9 @@
         </div>
         <h3>发表评论</h3>
         {% show_comment_form article %}
+        <div class="comment-list-panel">
+            {% show_comments article %}
+        </div>
     </article>
 {% endblock main %}
 {% block toc %}
@@ -33,5 +36,3 @@
         </div>
     {% endif %}
 {% endblock toc %}
-<!--<h3>发表评论</h3>-->
-<!--{% show_comment_form article %}-->
