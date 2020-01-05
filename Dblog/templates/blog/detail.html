@@ -1,22 +1,25 @@
 {% extends 'base.html' %}
+{% load comments_extras %}
 
 {% block main %}
     <article class="post post-1">
-                    <header class="entry-header">
-                        <h1 class="entry-title">{{ article.title }}</h1>
-                        <div class="entry-meta">
-                            <span class="post-category"><a href="#">{{ article.category.name }}</a></span>
-                            <span class="post-date"><a href="#"><time class="entry-date"
-                                                                      datetime="{{ article.createdAt }}">{{ article.createdAt }}</time></a></span>
-                            <span class="post-author"><a href="#">{{ article.author }}</a></span>
-                            <span class="comments-link"><a href="#">4 评论</a></span>
-                            <span class="views-count"><a href="#">588 阅读</a></span>
-                        </div>
-                    </header>
-                    <div class="entry-content clearfix">
-                        {{ article.content|safe }}
-                    </div>
-                </article>
+        <header class="entry-header">
+            <h1 class="entry-title">{{ article.title }}</h1>
+            <div class="entry-meta">
+                <span class="post-category"><a href="#">{{ article.category.name }}</a></span>
+                <span class="post-date"><a href="#"><time class="entry-date"
+                                                          datetime="{{ article.createdAt }}">{{ article.createdAt }}</time></a></span>
+                <span class="post-author"><a href="#">{{ article.author }}</a></span>
+                <span class="comments-link"><a href="#">4 评论</a></span>
+                <span class="views-count"><a href="#">588 阅读</a></span>
+            </div>
+        </header>
+        <div class="entry-content clearfix">
+            {{ article.content|safe }}
+        </div>
+        <h3>发表评论</h3>
+        {% show_comment_form article %}
+    </article>
 {% endblock main %}
 {% block toc %}
     {% if article.toc %}
@@ -30,3 +33,5 @@
         </div>
     {% endif %}
 {% endblock toc %}
+<!--<h3>发表评论</h3>-->
+<!--{% show_comment_form article %}-->
