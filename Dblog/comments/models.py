@@ -12,6 +12,8 @@ class Comments(models.Model):
     class Meta:
         verbose_name = '评论'
         verbose_name_plural = verbose_name
+        # 获取的数据默认按时间倒叙
+        ordering = ['-createdAt']
 
     def __str__(self):
         return '{0}: {1}'.format(self.name, self.text[:20])

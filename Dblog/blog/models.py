@@ -51,6 +51,8 @@ class Article(models.Model):
 
     class Meta:
         verbose_name_plural = '博客'
+        # 获取的数据默认按时间倒叙
+        ordering = ['-createdAt']
 
     def __str__(self):
         return self.title
