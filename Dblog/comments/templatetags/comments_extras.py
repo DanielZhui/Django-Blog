@@ -4,8 +4,6 @@ from ..forms import CommentsForm
 
 
 register = template.Library()
-
-
 @register.inclusion_tag('comments/inclusions/_form.html', takes_context=True)
 def show_comment_form(context, article, form=None):
     if form is None:
