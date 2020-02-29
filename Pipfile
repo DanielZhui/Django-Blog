@@ -10,6 +10,8 @@ django = {index = "https://pypi.tuna.tsinghua.edu.cn/simple",version = "==2.2.3"
 pymysql = {index = "https://pypi.tuna.tsinghua.edu.cn/simple",version = "*"}
 mysql = {index = "https://pypi.tuna.tsinghua.edu.cn/simple",version = "*"}
 markdown = {index = "https://pypi.tuna.tsinghua.edu.cn/simple",version = "*"}
+pytest = {index = "https://pypi.douban.com/simple",version = "*"}
+pip = {index = "https://pypi.douban.com/simple",version = "*"}
 
 [requires]
 python_version = "3.7"
