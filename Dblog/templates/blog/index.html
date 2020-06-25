@@ -20,7 +20,7 @@
                 <p>{{ article.excerpt }}...</p>
 <!--                {{ article.content|safe }}-->
                 <div class="read-more cl-effect-14">
-                    <a href="#" class="{{ article.get_absolute_url }}">继续阅读 <span class="meta-nav">→</span></a>
+                    <a href="{{ article.get_absolute_url }}" class="{{ article.get_absolute_url }}">继续阅读 <span class="meta-nav">→</span></a>
                 </div>
             </div>
         </article>
