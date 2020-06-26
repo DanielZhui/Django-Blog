@@ -26,6 +26,9 @@ def index(request):
 
 def detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
+    # 访问文章访问量 +1
+    article.increase_views()
+
     md = markdown.Markdown(extensions=[
         'markdown.extensions.extra',
         'markdown.extensions.codehilite',
