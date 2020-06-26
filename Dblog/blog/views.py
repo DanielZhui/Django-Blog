@@ -3,11 +3,17 @@ import markdown
 from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.views.generic import ListView
 
 from . models import Article, Category, Tag
 
 # Create your views here.
+
+
+class IndexView(ListView):
+    model = Article
+    template_name = 'blog/index.html'
+    context_object_name = 'articles'
 
 
 def index(request):
@@ -55,7 +61,6 @@ def archive(request, year, month):
 # 分类页面
 def category(request, pk):
     cate = get_object_or_404(Category, pk=pk)
-    print('>>>', cate)
     articles = Article.objects.filter(category=cate).order_by('-createdAt')
     return render(request, 'blog/index.html', context={'articles': articles})
 
