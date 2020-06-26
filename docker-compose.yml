@@ -1,0 +1,47 @@
+version: '2'
+
+services:
+  # db service
+  mysql_blog:
+    image: mysql:5.7.14
+    container_name: db_blog
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./data/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./init_database.sql:/docker-entrypoint-initdb.d/init_database.sql
+      - ./data/mysql/data:/var/lib/mysql
+    ports:
+      - "13306:3306"
+    networks:
+      - back
+    restart: always
+
+  # blog-service
+  django-blog:
+    build: .
+    image: django-blog-service:0.1
+    container_name: django-blog
+    volumes:
+      - .:/code
+    links:
+      - mysql_blog:mysql
+    environment:
+      - ENV=development
+      - MYSQL_HOST=mysql_blog
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=blog
+      - MYSQL_PORT=3306
+    networks:
+      - back
+    ports:
+      - "28001:8001"
+    tty: true
+    restart: always
+    entrypoint: /bin/sh -c "cd Dblog && python manage.py migrate && python manage.py runserver 0.0.0.0:80001"
+
+networks:
+  back:
+    external:
+      name: django-blog
