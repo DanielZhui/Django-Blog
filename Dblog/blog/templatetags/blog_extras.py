@@ -1,7 +1,8 @@
 # -*- coding:utf-8 -*-
 
 from django import template
-from django.db.models.aggregates import Count
+from django.db import connection
+from django.db.models import Count
 
 from ..models import Article, Category, Tag
 
@@ -17,6 +18,10 @@ def show_recent_posts(context, num=5):
 
 @register.inclusion_tag('blog/inclusions/_archives.html', takes_context=True)
 def show_archives(context):
+    # TODO: 按月统计文章数还未完成
+    select = {'month': connection.ops.date_trunc_sql('year', 'createdAt')}
+    count = Article.objects.extra(select=select).values('month').annotate(number=Count('id'))
+    print(count)
     return {
         # 按月查询
         'date_list': Article.objects.dates('createdAt', 'month', order='DESC')
@@ -25,6 +30,7 @@ def show_archives(context):
 
 @register.inclusion_tag('blog/inclusions/_categories.html', takes_context=True)
 def show_categories(context):
+    from django.db.models.aggregates import Count
     category_list = Category.objects.annotate(article_count=Count('article')).filter(article_count__gte=0)
     return {
         'category_list': category_list
