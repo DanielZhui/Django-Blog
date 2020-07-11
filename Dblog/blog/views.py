@@ -18,13 +18,6 @@ class IndexView(ListView):
 
 def index(request):
     articles = Article.objects.all().order_by('createdAt')
-    for article in articles:
-        article.content = markdown.markdown(article.content,
-                               extensions=[
-                                   'markdown.extensions.extra',
-                                   'markdown.extensions.codehilite',
-                                   'markdown.extensions.toc'
-                               ])
     return render(request, 'blog/index.html', context={
         'articles': articles
     })
@@ -38,7 +31,7 @@ def detail(request, pk):
     md = markdown.Markdown(extensions=[
         'markdown.extensions.extra',
         'markdown.extensions.codehilite',
-        # 'markdown.extensions.toc'
+        'markdown.extensions.toc',
         TocExtension(slugify=slugify),
     ])
     article.content = md.convert(article.content)
