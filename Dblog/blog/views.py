@@ -16,13 +16,6 @@ class IndexView(ListView):
     context_object_name = 'articles'
 
 
-def index(request):
-    articles = Article.objects.all().order_by('createdAt')
-    return render(request, 'blog/index.html', context={
-        'articles': articles
-    })
-
-
 def detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     # 访问文章访问量 +1
@@ -51,11 +44,14 @@ def archive(request, year, month):
     return render(request, 'blog/index.html', context={'articles': articles})
 
 
-# 分类页面
-def category(request, pk):
-    cate = get_object_or_404(Category, pk=pk)
-    articles = Article.objects.filter(category=cate).order_by('-createdAt')
-    return render(request, 'blog/index.html', context={'articles': articles})
+class CategoryView(ListView):
+    model = Article
+    template_name = 'blog/index.html'
+    context_object_name = 'articles'
+
+    def get_queryset(self):
+        cate = get_object_or_404(Category, pk=self.kwargs.get('pk'))
+        return super(CategoryView, self).get_queryset().filter(category=cate)
 
 
 # 标签页面
