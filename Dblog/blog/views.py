@@ -35,13 +35,13 @@ def detail(request, pk):
     return render(request, 'blog/detail.html', context={'article': article})
 
 
-# 归档函数
-def archive(request, year, month):
-    articles = Article.objects.filter(
-        createdAt__year=year,
-        createdAt__month=month,
-    ).order_by('createdAt')
-    return render(request, 'blog/index.html', context={'articles': articles})
+class ArchiveView(ListView):
+    model = Article
+    template_name = 'blog/index.html'
+    context_object_name = 'articles'
+
+    def get_queryset(self):
+        return super(ArchiveView, self).get_queryset().filter(createdAt__year=self.kwargs.get('year'), createdAt__month=self.kwargs.get('month')).order_by('createdAt')
 
 
 class CategoryView(ListView):
@@ -55,12 +55,6 @@ class CategoryView(ListView):
 
 
 # 标签页面
-def tag(request, pk):
-    tags = get_object_or_404(Tag, pk=pk)
-    articles = Article.objects.filter(tags=tags).order_by('createdAt')
-    return render(request, 'blog/index.html', context={'articles': articles})
-
-
 class TagView(ListView):
     model = Article
     template_name = 'blog/index.html'
