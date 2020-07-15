@@ -59,3 +59,13 @@ def tag(request, pk):
     tags = get_object_or_404(Tag, pk=pk)
     articles = Article.objects.filter(tags=tags).order_by('createdAt')
     return render(request, 'blog/index.html', context={'articles': articles})
+
+
+class TagView(ListView):
+    model = Article
+    template_name = 'blog/index.html'
+    context_object_name = 'articles'
+
+    def get_queryset(self):
+        tags = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
+        return super(TagView, self).get_queryset().filter(tags=tags).order_by('createdAt')
