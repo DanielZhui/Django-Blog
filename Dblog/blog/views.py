@@ -44,11 +44,7 @@ class ArchiveView(ListView):
         return super(ArchiveView, self).get_queryset().filter(createdAt__year=self.kwargs.get('year'), createdAt__month=self.kwargs.get('month')).order_by('createdAt')
 
 
-class CategoryView(ListView):
-    model = Article
-    template_name = 'blog/index.html'
-    context_object_name = 'articles'
-
+class CategoryView(IndexView):
     def get_queryset(self):
         cate = get_object_or_404(Category, pk=self.kwargs.get('pk'))
         return super(CategoryView, self).get_queryset().filter(category=cate)
