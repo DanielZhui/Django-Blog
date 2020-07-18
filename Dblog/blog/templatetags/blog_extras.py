@@ -38,6 +38,15 @@ def show_categories(context):
 
 @register.inclusion_tag('blog/inclusions/_tags.html', takes_context=True)
 def show_tags(context):
+    tag_obj_list = []
+    tag_list = Tag.objects.all()
+    for tag in tag_list:
+        tag_obj = {}
+        count = Article.objects.filter(tags=tag).count()
+        tag_obj['name'] = tag.name
+        tag_obj['pk'] = tag.id
+        tag_obj['count'] = count
+        tag_obj_list.append(tag_obj)
     return {
-        'tag_list': Tag.objects.all()
+        'tag_obj_list': tag_obj_list
     }

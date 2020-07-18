@@ -19,13 +19,13 @@ class IndexView(PaginationMixin, ListView):
     paginate_by = 3
 
 
-class DetailView(DetailView):
+class ArticleDetailView(DetailView):
     model = Article
     template_name = 'blog/detail.html'
     context_object_name = 'article'
 
     def get(self, request, *args, **kwargs):
-        response = super(DetailView, self).get(request, *args, **kwargs)
+        response = super(ArticleDetailView, self).get(request, *args, **kwargs)
         self.object.increase_views()
         return response
 

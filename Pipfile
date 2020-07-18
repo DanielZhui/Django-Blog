@@ -13,6 +13,7 @@ markdown = {index = "https://pypi.tuna.tsinghua.edu.cn/simple",version = "*"}
 pytest = {index = "https://pypi.douban.com/simple",version = "*"}
 pip = {index = "https://pypi.douban.com/simple",version = "*"}
 faker = {index = "https://pypi.douban.com/simple",version = "*"}
+django-pure-pagination = "*"
 
 [requires]
 python_version = "3.7"
