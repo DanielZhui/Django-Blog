@@ -4,6 +4,7 @@ from django import template
 from django.db import connection
 from django.db.models import Count
 from django.db.models.aggregates import Count
+from django.db.models.functions import ExtractYear, ExtractMonth
 
 from ..models import Article, Category, Tag
 
@@ -21,11 +22,10 @@ def show_recent_posts(context, num=5):
 @register.inclusion_tag('blog/inclusions/_archives.html', takes_context=True)
 def show_archives(context):
     # TODO: 按月统计文章数还未完成
-    select = {'month': connection.ops.date_trunc_sql('year', 'createdAt')}
-    count = Article.objects.extra(select=select).values('month').annotate(number=Count('id'))
+    data = Article.objects.annotate(year=ExtractYear('createdAt'), month=ExtractMonth('createdAt')).values('year', 'month').order_by('year', 'month').annotate(article_count=Count('id'))
     return {
         # 按月查询
-        'date_list': Article.objects.dates('createdAt', 'month', order='DESC')
+        'data_list': data
     }
 
 

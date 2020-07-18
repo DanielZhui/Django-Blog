@@ -1,10 +1,10 @@
 <div class="widget widget-archives">
   <h3 class="widget-title">归档</h3>
   <ul>
-    {% for date in date_list %}
+    {% for date in data_list %}
       <li>
         <a href="{% url 'blog:archive' date.year date.month %}">
-          {{ date.year }} 年 {{ date.month }} 月
+          {{ date.year }} 年 {{ date.month }} 月({{ date.article_count }})
         </a>
       </li>
     {% empty %}
