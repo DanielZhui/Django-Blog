@@ -13,7 +13,6 @@ def comment(request, article_pk):
     if form.is_valid():
         comments = form.save(commit=False)
         comments.article = article
-        print('>>>', comments)
         comments.save()
         messages.add_message(request, messages.SUCCESS, '评论发表成功！', extra_tags='success')
         return redirect(article)

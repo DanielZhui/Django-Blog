@@ -21,7 +21,6 @@ def show_archives(context):
     # TODO: 按月统计文章数还未完成
     select = {'month': connection.ops.date_trunc_sql('year', 'createdAt')}
     count = Article.objects.extra(select=select).values('month').annotate(number=Count('id'))
-    print(count)
     return {
         # 按月查询
         'date_list': Article.objects.dates('createdAt', 'month', order='DESC')
