@@ -21,7 +21,6 @@ def show_recent_posts(context, num=5):
 
 @register.inclusion_tag('blog/inclusions/_archives.html', takes_context=True)
 def show_archives(context):
-    # TODO: 按月统计文章数还未完成
     data = Article.objects.annotate(year=ExtractYear('createdAt'), month=ExtractMonth('createdAt')).values('year', 'month').order_by('year', 'month').annotate(article_count=Count('id'))
     return {
         # 按月查询

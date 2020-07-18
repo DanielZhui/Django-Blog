@@ -16,7 +16,7 @@ class IndexView(PaginationMixin, ListView):
     template_name = 'blog/index.html'
     context_object_name = 'articles'
     # ListView 中已经封装好 pagination，只需要指定 pagination_by 属性后开启分页功能，代表每一页包含多少篇文章
-    paginate_by = 3
+    paginate_by = 10
 
 
 class ArticleDetailView(DetailView):
@@ -43,10 +43,11 @@ class ArticleDetailView(DetailView):
         return article
 
 
-class ArchiveView(ListView):
+class ArchiveView(PaginationMixin, ListView):
     model = Article
     template_name = 'blog/index.html'
     context_object_name = 'articles'
+    paginate_by = 10
 
     def get_queryset(self):
         return super(ArchiveView, self).get_queryset().filter(createdAt__year=self.kwargs.get('year'), createdAt__month=self.kwargs.get('month')).order_by('createdAt')
