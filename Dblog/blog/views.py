@@ -4,18 +4,19 @@ from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
+from pure_pagination.mixins import PaginationMixin
 
 from . models import Article, Category, Tag
 
 # Create your views here.
 
 
-class IndexView(ListView):
+class IndexView(PaginationMixin, ListView):
     model = Article
     template_name = 'blog/index.html'
     context_object_name = 'articles'
     # ListView 中已经封装好 pagination，只需要指定 pagination_by 属性后开启分页功能，代表每一页包含多少篇文章
-    paginate_by = 10
+    paginate_by = 3
 
 
 class DetailView(DetailView):
