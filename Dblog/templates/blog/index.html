@@ -2,7 +2,7 @@
 
 {% block main %}
     {% for article in articles %}
-         <article class="article.pk">
+        <article class="article.pk">
             <header class="entry-header">
                 <h1 class="entry-title">
                     <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
@@ -18,7 +18,6 @@
             </header>
             <div class="entry-content clearfix">
                 <p>{{ article.excerpt }}...</p>
-<!--                {{ article.content|safe }}-->
                 <div class="read-more cl-effect-14">
                     <a href="{{ article.get_absolute_url }}" class="{{ article.get_absolute_url }}">继续阅读 <span class="meta-nav">→</span></a>
                 </div>
@@ -27,4 +26,18 @@
     {% empty %}
         <div class="no-post">暂时还没有发布的文章！</div>
     {% endfor %}
+    {% if is_paginated %}
+        <div class="pagination-simple">
+        <!-- 如果当前页还有上一页，显示一个上一页的按钮 -->
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+        {% endif %}
+        <!-- 显示当前页面信息 -->
+        <span class="current">第 {{ page_obj.number }} 页 / 共 {{ paginator.num_pages }} 页</span>
+        <!-- 如果当前页还有下一页，显示一个下一页的按钮 -->
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+        {% endif %}
+        </div>
+    {% endif %}
 {% endblock main %}
