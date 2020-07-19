@@ -3,9 +3,8 @@ from . models import Article, Category, Tag
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'createdAt', 'updatedAt', 'category', 'author']
-    # fields 表示可编辑字段
-    # fields = ['title', 'category', 'content']
+    list_display = ['id', 'title', 'content', 'createdAt', 'updatedAt', 'category', 'author']
+    list_editable = ['title', 'content', 'author']
 
     def save_model(self, request, obj, form, change):
         obj.author = request.user
