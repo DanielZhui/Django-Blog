@@ -74,7 +74,6 @@ class TagView(ListView):
 # 文章搜索
 def search(request):
     q = request.GET.get('q').strip(' ')
-    print('>>', q)
 
     if not q:
         err_msg = '请输入搜索关键词'
