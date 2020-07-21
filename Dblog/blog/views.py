@@ -2,9 +2,11 @@ import re
 import markdown
 from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
 from pure_pagination.mixins import PaginationMixin
+from django.contrib import messages
+from django.db.models import Q
 
 from . models import Article, Category, Tag
 
@@ -68,3 +70,16 @@ class TagView(ListView):
     def get_queryset(self):
         tags = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
         return super(TagView, self).get_queryset().filter(tags=tags).order_by('createdAt')
+
+# 文章搜索
+def search(request):
+    q = request.GET.get('q').strip(' ')
+    print('>>', q)
+
+    if not q:
+        err_msg = '请输入搜索关键词'
+        messages.add_message(request, messages.ERROR, err_msg, extra_tags='denger')
+        return redirect('blog:index')
+
+    articles = Article.objects.filter(Q(title__icontains=q) | Q(content__icontains=q))
+    return render(request, 'blog/index.html', {'articles': articles})
