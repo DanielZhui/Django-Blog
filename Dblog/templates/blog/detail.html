@@ -15,7 +15,7 @@
             </div>
         </header>
         <div class="entry-content clearfix">
-            {{ article.content|safe }}
+            {{ article.body_html|safe }}
         </div>
         <h3>发表评论</h3>
         {% show_comment_form article %}

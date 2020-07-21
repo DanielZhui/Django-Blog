@@ -29,18 +29,18 @@ class ArticleDetailView(DetailView):
         self.object.increase_views()
         return response
 
-    def get_object(self, queryset=None):
-        article = super().get_object(queryset=None)
-        md = markdown.Markdown(extensions=[
-            'markdown.extensions.extra',
-            'markdown.extensions.codehilite',
-            TocExtension(slugify=slugify),
-        ])
-        article.content = md.convert(article.content)
-        # 当文章中不存在目录时,显示空''
-        result = re.search(r'<div class="toc">\s*<ul>(.*)</ul>\s*</div>', md.toc, re.S)
-        article.toc = result.group(1) if result is not None else ''
-        return article
+    # def get_object(self, queryset=None):
+    #     article = super().get_object(queryset=None)
+    #     md = markdown.Markdown(extensions=[
+    #         'markdown.extensions.extra',
+    #         'markdown.extensions.codehilite',
+    #         TocExtension(slugify=slugify),
+    #     ])
+    #     article.content = md.convert(article.content)
+    #     # 当文章中不存在目录时,显示空''
+    #     result = re.search(r'<div class="toc">\s*<ul>(.*)</ul>\s*</div>', md.toc, re.S)
+    #     article.toc = result.group(1) if result is not None else ''
+    #     return article
 
 
 class ArchiveView(PaginationMixin, ListView):
