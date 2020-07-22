@@ -31,3 +31,12 @@ class ArticleModelTestCase(TestCase):
     def test_auto_populate_excerpt(self):
         self.assertIsNotNone(self.article.excerpt)
         self.assertTrue(0 < len(self.article.excerpt) <= 60)
+
+    def test_increase_views(self):
+        self.article.increase_views()
+        self.article.refresh_from_db()
+        self.assertEqual(self.article.views, 1)
+
+        self.article.increase_views()
+        self.article.refresh_from_db()
+        self.assertEqual(self.article.views, 2)
