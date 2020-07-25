@@ -54,5 +54,5 @@ class CategoryViewTestCase(BlogDateTestCase):
         self.assertIn('articles', response.context)
         self.assertIn('is_paginated', response.context)
         self.assertIn('page_obj', response.context)
-        self.assertEqual(response_context['articles'.count(), 1])
-        
+        self.assertEqual(response.context['articles'].count(), 1)
+
