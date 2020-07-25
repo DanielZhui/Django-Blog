@@ -56,3 +56,38 @@ class CategoryViewTestCase(BlogDateTestCase):
         self.assertIn('page_obj', response.context)
         self.assertEqual(response.context['articles'].count(), 1)
 
+
+class ArticleDetailViewTestCase(BlogDateTestCase):
+    def setUp(self):
+        super().setUp()
+        self.md_article = Article.objects.create(
+            title = 'test article',
+            content = '# test content',
+            category = self.cate_other,
+            author=self.user
+        )
+        self.url = reverse('blog:detail', kwargs={'pk': self.md_article.pk})
+
+    def test_exits_view(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed('blog/detail.html')
+        self.assertContains(response, self.md_article.title)
+        self.assertIn('article', response.context)
+
+    def test_increase_view(self):
+        self.client.get(self.url)
+        self.md_article.refresh_from_db()
+        self.assertEqual(self.md_article.views, 1)
+        
+        self.client.get(self.url)
+        self.md_article.refresh_from_db()
+        self.assertEqual(self.md_article.views, 2)
+
+    def test_markdown_article_and_set_toc(self):
+        response = self.client.get(self.url)
+        self.assertContains(response, 'article')
+        self.assertContains(response, self.md_article.title)
+        
+        article_template = response.context['article']
+        self.assertHTMLEqual(article_template.body_html, '<h1 id="test-content">test content</h1>')
