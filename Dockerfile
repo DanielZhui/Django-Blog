@@ -8,12 +8,8 @@ RUN apk update \
   # Pillow dependencies
   && apk add jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev
 
-RUN pip install pipenv -i https://pypi.douban.com/simple
+COPY requirements.txt /code/requirements.txt
 
-COPY Pipfile /code/Pipfile
-
-COPY Pipfile.lock /code/Pipfile.lock
-
-RUN pipenv install --system --deploy --ignore-pipfile
+RUN pip install -r requirements.txt -i https://pypi.douban.com/simple
 
 ADD . /code
