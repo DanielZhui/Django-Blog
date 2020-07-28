@@ -127,3 +127,6 @@ dmypy.json
 # project
 .idea
 .pytest_cache
+
+# mysql data
+data/mysql/data*
