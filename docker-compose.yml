@@ -40,7 +40,6 @@ services:
     tty: true
     restart: always
     entrypoint: /bin/sh -c "cd Dblog && python manage.py migrate && python manage.py runserver 0.0.0.0:8001"
-    # entrypoint: /bin/sh -c "ping www.baidu.com"
 
 networks:
   back:
