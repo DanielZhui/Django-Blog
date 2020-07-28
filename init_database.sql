@@ -1,2 +1,2 @@
-CREATE DATABASE IF NOT EXISTS blog DEFAULT SET utf8 COLUMN utf8_general_ci;
-use blog
+CREATE DATABASE IF NOT EXISTS blog DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+use blog;
