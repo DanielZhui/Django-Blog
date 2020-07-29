@@ -10,3 +10,6 @@ stop-service:
 restart-service:
 	make start-service
 	make stop-service
+
+create-superuser:
+	docker exec -it django-blog python /code/Dblog/manage.py createsuperuser

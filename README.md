@@ -74,3 +74,19 @@ Use Django to build a personal Blog
 ### 五、获取某个标签下所有文章
 
 ### 六、 获取某篇文章评论
+
+## 项目相关命令
+```
+**启动项目**
+make create-network
+make start-service
+
+**停止项目**
+make stop-service
+
+**重启项目**
+make restart-service
+
+**创建超级管理员**
+make create-superuser
+```
