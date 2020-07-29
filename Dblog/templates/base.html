@@ -89,9 +89,9 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="首页">首页</a></li>
-                            <li class="cl-effect-11"><a href="full-width.html" data-hover="博客">博客</a></li>
-                            <li class="cl-effect-11"><a href="about.html" data-hover="关于">关于</a></li>
-                            <li class="cl-effect-11"><a href="contact.html" data-hover="联系">联系</a></li>
+                            <li class="cl-effect-11"><a href="https://github.com/DanielZhui?tab=repositories" data-hover="github" target="_blank">github</a></li>
+                            <!-- <li class="cl-effect-11"><a href="about.html" data-hover="关于">关于</a></li>
+                            <li class="cl-effect-11"><a href="contact.html" data-hover="联系">联系</a></li> -->
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </nav>
@@ -109,7 +109,7 @@
     </header>
 </div>
 <div class="copyrights">Collect from <a href="http://www.cssmoban.com/">网页模板</a></div>
-<div class="copyrights">Modified by <a href="http://zmrenwu.com/">追梦人物的博客</a></div>
+<div class="copyrights">Modified by <a href="http://blog.wollens.top/blog/">wollens blog</a></div>
 
 <div class="content-body">
     <div class="container">
@@ -138,9 +138,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="copyright">&copy 2020 <a href="http://www.cssmoban.com/"
-                                                        target="_blank" title="模板之家">welcome</a>
-                    <a href="http://zmrenwu.com/" title="网页模板" target="_blank">wollens blog</a>
+                <p class="copyright">&copy 2020
+                    <a href="{% url 'blog:index' %}" title="博客首页" target="_blank">welcome wollens blog</a>
                 </p>
             </div>
         </div>
@@ -152,10 +151,10 @@
     <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
     <nav>
         <ul>
-            <li><a href="blog/index.html">首页</a></li>
-            <li><a href="full-width.html">博客</a></li>
-            <li><a href="about.html">关于</a></li>
-            <li><a href="contact.html">联系</a></li>
+            <li><a href="{% url 'blog:index' %}">首页</a></li>
+            <li><a href="https://github.com/DanielZhui?tab=repositories" target="_blank">github</a></li>
+            <!-- <li><a href="about.html">关于</a></li>
+            <li><a href="contact.html">联系</a></li> -->
         </ul>
     </nav>
 </div>
