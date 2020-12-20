@@ -64,19 +64,26 @@ Use Django to build a personal Blog
 ## API 接口
 
 ### 一、获取所有文章
+> /blog/articles
 
 ### 二、获取某篇文章详情
+> /blog/articles/:id
 
 ### 三、获取具体某个时间段所有文章
+> /blog/archives/:year/:month
 
 ### 四、获取某个分类下所有文章
+> /articles/categories/:id
 
 ### 五、获取某个标签下所有文章
+> articles/tags/:id
 
 ### 六、 获取某篇文章评论
+> articles/comment/:id
 
 ## 项目相关命令
 ```
+- 采用 make 命令配置项目相关命令
 **启动项目**
 make create-network
 make start-service

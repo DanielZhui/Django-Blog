@@ -5,5 +5,5 @@ from . import views
 
 app_name = 'comments'
 urlpatterns = [
-    path('comment/<int:article_pk>', views.comment, name='comment')
+    path('articles/comment/<int:article_pk>', views.comment, name='comment')
 ]
