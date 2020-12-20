@@ -166,6 +166,7 @@
             src="http://static.wollens.top/%E7%81%AB%E7%AE%AD.svg" style="max-width: 50%;" alt=""></div>
     <script src="{% static '/blog/js/script.js' %}"></script>
     <script>
+        // 回到顶部动画
         var timer = null;
         rocket.onclick = function () {
             cancelAnimationFrame(timer);
@@ -184,6 +185,8 @@
                 }
             });
         }
+
+        // 只有在非顶部是才显示回到顶部按钮
         window.onscroll = function () {
             if (document.documentElement.scrollTop + document.body.scrollTop > 100) {
                 document.getElementById("rocket").style.display = "block";
