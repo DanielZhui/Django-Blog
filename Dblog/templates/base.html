@@ -3,6 +3,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>wollens Blog</title>
 
@@ -23,143 +24,175 @@
     <script src="{% static '/blog/js/pace.min.js' %}"></script>
     <script src="{% static '/blog/js/modernizr.custom.js' %}"></script>
     <style>
-    .codehilite {
-      padding: 0;
-    }
+        .codehilite {
+            padding: 0;
+        }
 
-    /* for block of numbers */
-    .hljs-ln-numbers {
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+        /* for block of numbers */
+        .hljs-ln-numbers {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
 
-      text-align: center;
-      color: #ccc;
-      border-right: 1px solid #CCC;
-      vertical-align: top;
-      padding-right: 5px;
-    }
+            text-align: center;
+            color: #ccc;
+            border-right: 1px solid #CCC;
+            vertical-align: top;
+            padding-right: 5px;
+        }
 
-    .hljs-ln-n {
-      width: 30px;
-    }
+        .hljs-ln-n {
+            width: 30px;
+        }
 
-    /* for block of code */
-    .hljs-ln .hljs-ln-code {
-      padding-left: 10px;
-      white-space: pre;
-    }
-  </style>
+        /* for block of code */
+        .hljs-ln .hljs-ln-code {
+            padding-left: 10px;
+            white-space: pre;
+        }
+    </style>
 </head>
 {% if messages %}
-    {% for massage in massages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
-            {{ message }}
-        </div>
-    {% endfor %}
+{% for massage in massages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+    {{ message }}
+</div>
+{% endfor %}
 {% endif %}
+
 <body>
+    <div id="topAnchor"></div>
     <script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
     <script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
     <script>
         hljs.initHighlightingOnLoad();
         hljs.initLineNumbersOnLoad();
     </script>
-<div class="container">
-    <header id="site-header">
-        <div class="row">
-            <div class="col-md-4 col-sm-5 col-xs-8">
-                <div class="logo">
-                    <h1><a href="{% url 'blog:index' %}"><b>Wollens Blog</b></a></h1>
-                </div>
-            </div><!-- col-md-4 -->
-            <div class="col-md-8 col-sm-7 col-xs-4">
-                <nav class="main-nav" role="navigation">
-                    <div class="navbar-header">
-                        <button type="button" id="trigger-overlay" class="navbar-toggle">
-                            <span class="ion-navicon"></span>
-                        </button>
+    <div class="container">
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1><a href="{% url 'blog:index' %}"><b>Wollens Blog</b></a></h1>
                     </div>
+                </div><!-- col-md-4 -->
+                <div class="col-md-8 col-sm-7 col-xs-4">
+                    <nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
 
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="首页">首页</a></li>
-                            <li class="cl-effect-11"><a href="https://github.com/DanielZhui?tab=repositories" data-hover="github" target="_blank">github</a></li>
-                            <!-- <li class="cl-effect-11"><a href="about.html" data-hover="关于">关于</a></li>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="首页">首页</a></li>
+                                <li class="cl-effect-11"><a href="https://github.com/DanielZhui?tab=repositories"
+                                        data-hover="github" target="_blank">github</a></li>
+                                <!-- <li class="cl-effect-11"><a href="about.html" data-hover="关于">关于</a></li>
                             <li class="cl-effect-11"><a href="contact.html" data-hover="联系">联系</a></li> -->
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
-                </nav>
-                <div id="header-search-box">
-                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
-                    <div id="search-form" class="search-form">
-                        <form role="search" method="get" id="searchform" action="{% url 'blog:search' %}">
-                            <input type="search" name="q" placeholder="搜索" required>
-                            <button type="submit"><span class="ion-ios-search-strong"></span></button>
-                        </form>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </nav>
+                    <div id="header-search-box">
+                        <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
+                        <div id="search-form" class="search-form">
+                            <form role="search" method="get" id="searchform" action="{% url 'blog:search' %}">
+                                <input type="search" name="q" placeholder="搜索" required>
+                                <button type="submit"><span class="ion-ios-search-strong"></span></button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </div><!-- col-md-8 -->
-        </div>
-    </header>
-</div>
-<div class="copyrights">Collect from <a href="http://www.cssmoban.com/">网页模板</a></div>
-<div class="copyrights">Modified by <a href="http://blog.wollens.top/blog/">wollens blog</a></div>
-
-<div class="content-body">
-    <div class="container">
-        <div class="row">
-            <main class="col-md-8">
-                {% block main %}
-                {% endblock %}
-            </main>
-            <aside class="col-md-4">
-                {% block toc %}
-                {% endblock toc %}
-
-                {% show_recent_posts %}
-                {% show_archives %}
-                {% show_categories %}
-                {% show_tags %}
-
-                <div class="rss">
-                  <a href="{% url 'rss' %}"><span class="ion-social-rss-outline"></span> RSS 订阅</a>
-                </div>
-            </aside>
-        </div>
+                </div><!-- col-md-8 -->
+            </div>
+        </header>
     </div>
-</div>
-<footer id="site-footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="copyright">&copy 2020
-                    <a href="{% url 'blog:index' %}" title="博客首页" target="_blank">welcome wollens blog</a>
-                </p>
+    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/">网页模板</a></div>
+    <div class="copyrights">Modified by <a href="http://blog.wollens.top/blog/">wollens blog</a></div>
+
+    <div class="content-body">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8">
+                    {% block main %}
+                    {% endblock %}
+                </main>
+                <aside class="col-md-4">
+                    {% block toc %}
+                    {% endblock toc %}
+
+                    {% show_recent_posts %}
+                    {% show_archives %}
+                    {% show_categories %}
+                    {% show_tags %}
+
+                    <div class="rss">
+                        <a href="{% url 'rss' %}"><span class="ion-social-rss-outline"></span> RSS 订阅</a>
+                    </div>
+                </aside>
             </div>
         </div>
     </div>
-</footer>
+    <footer id="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copyright">&copy 2020
+                        <a href="{% url 'blog:index' %}" title="博客首页" target="_blank">welcome wollens blog</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-<!-- Mobile Menu -->
-<div class="overlay overlay-hugeinc">
-    <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
-    <nav>
-        <ul>
-            <li><a href="{% url 'blog:index' %}">首页</a></li>
-            <li><a href="https://github.com/DanielZhui?tab=repositories" target="_blank">github</a></li>
-            <!-- <li><a href="about.html">关于</a></li>
+    <!-- Mobile Menu -->
+    <div class="overlay overlay-hugeinc">
+        <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+        <nav>
+            <ul>
+                <li><a href="{% url 'blog:index' %}">首页</a></li>
+                <li><a href="https://github.com/DanielZhui?tab=repositories" target="_blank">github</a></li>
+                <!-- <li><a href="about.html">关于</a></li>
             <li><a href="contact.html">联系</a></li> -->
-        </ul>
-    </nav>
-</div>
-
-<script src="{% static '/blog/js/script.js' %}"></script>
-
+            </ul>
+        </nav>
+    </div>
+    <div id="rocket" style="position:fixed;right:10px;bottom:10px;"><img
+            src="http://static.wollens.top/%E7%81%AB%E7%AE%AD.svg" style="max-width: 50%;" alt=""></div>
+    <script src="{% static '/blog/js/script.js' %}"></script>
+    <script>
+        var timer = null;
+        rocket.onclick = function () {
+            cancelAnimationFrame(timer);
+            //获取当前毫秒数
+            var startTime = +new Date();
+            //获取当前页面的滚动高度
+            var b = document.body.scrollTop || document.documentElement.scrollTop;
+            var d = 500;
+            var c = b;
+            timer = requestAnimationFrame(function func() {
+                var t = d - Math.max(0, startTime - (+new Date()) + d);
+                document.documentElement.scrollTop = document.body.scrollTop = t * (-c) / d + b;
+                timer = requestAnimationFrame(func);
+                if (t == d) {
+                    cancelAnimationFrame(timer);
+                }
+            });
+        }
+        window.onscroll = function () {
+            if (document.documentElement.scrollTop + document.body.scrollTop > 100) {
+                document.getElementById("rocket").style.display = "block";
+            }
+            else {
+                document.getElementById("rocket").style.display = "none";
+            }
+        }
+    </script>
 </body>
+
 </html>
