@@ -1,4 +1,4 @@
-# Django-Blog
+# Django-Blog [![Test status](https://github.com/DanielZhui/Django-Blog/workflows/test/badge.svg)](https://github.com/DanielZhui/Django-Blog/actions)
 Use Django to build a personal Blog
 
 ## Django 开发个人 blog 系统
