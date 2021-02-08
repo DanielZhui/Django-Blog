@@ -25,7 +25,7 @@ jobs:
           mysql version: 5.7
           mysql database: blog
           mysql user: root
-          mysql root password: macadmin
+          mysql root password: test
 
       - name: Install dependencies
         run: |
@@ -35,4 +35,12 @@ jobs:
       - name: Test
         run: |
           cd ./Dblog
+          python manage.py makemigrations
+          python manage.py migrate
           python manage.py test
+        env:
+          MYSQL_DATABASE: blog
+          MYSQL_USER: root
+          MYSQL_PASSWORD: test
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_PORT: 3306
