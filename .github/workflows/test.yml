@@ -24,7 +24,7 @@ jobs:
         with:
           mysql version: 5.7
           mysql database: blog
-          mysql root user: root
+          mysql user: root
           mysql root password: macadmin
 
       - name: Install dependencies
