@@ -79,7 +79,7 @@ class ArticleDetailViewTestCase(BlogDateTestCase):
         self.client.get(self.url)
         self.md_article.refresh_from_db()
         self.assertEqual(self.md_article.views, 1)
-        
+
         self.client.get(self.url)
         self.md_article.refresh_from_db()
         self.assertEqual(self.md_article.views, 2)
@@ -88,6 +88,6 @@ class ArticleDetailViewTestCase(BlogDateTestCase):
         response = self.client.get(self.url)
         self.assertContains(response, 'article')
         self.assertContains(response, self.md_article.title)
-        
+
         article_template = response.context['article']
         self.assertHTMLEqual(article_template.body_html, '<h1 id="test-content">test content</h1>')
